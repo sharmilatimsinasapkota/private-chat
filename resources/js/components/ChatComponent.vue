@@ -1,0 +1,22 @@
+<template>
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-3">
+                <div class="card   card-default">
+                    <div class="card-header">Private Chat</div>
+                            <ul class="list-group">
+                                <li class="list-group-item">Cras justo odio</li>
+                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        mounted() {
+            console.log('Component mounted.')
+        }
+    }
+</script>
