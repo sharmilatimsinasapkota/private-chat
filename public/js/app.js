@@ -1965,48 +1965,74 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       chats: [],
-      open: true
+      open: true,
+      session_block: false //method and variable name cannot be same in vuejs
+
     };
   },
   methods: {
     send: function send() {
-      console.log('hey hey');
+      console.log("hey hey");
     },
     close: function close() {
       this.open = false;
+    },
+    clear: function clear() {
+      this.chats = [];
+    },
+    block: function block() {
+      this.session_block = true;
+    },
+    unblock: function unblock() {
+      this.session_block = false;
     }
   },
   created: function created() {
     this.chats.push({
-      message: 'Heyy'
+      message: "Heyy"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you'
+      message: "How are you"
     }, {
-      message: 'How are you bottom'
+      message: "How are you bottom"
     });
   }
 });
@@ -6445,7 +6471,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.chat-box{  \n        height: 400px;\n}\n.card-body {\n    overflow-y: scroll ! important;\n}\n", ""]);
+exports.push([module.i, "\n.chat-box {\n  height: 400px;\n}\n.card-body {\n  overflow-y: scroll !important;\n}\n", ""]);
 
 // exports
 
@@ -38382,9 +38408,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.open
-    ? _c("div", { staticClass: "card   card-default chat-box" }, [
+    ? _c("div", { staticClass: "card card-default chat-box" }, [
         _c("div", { staticClass: "card-header" }, [
-          _vm._v("Chats\n        "),
+          _c("b", { class: { "text-danger": _vm.session_block } }, [
+            _vm._v("\n          User Name\n          "),
+            _vm.session_block ? _c("span", [_vm._v("(Blocked)")]) : _vm._e()
+          ]),
+          _vm._v(" "),
           _c(
             "a",
             {
@@ -38402,7 +38432,65 @@ var render = function() {
                 attrs: { "aria-hidden": "true" }
               })
             ]
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "dropdown float-right mr-4" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu",
+                attrs: { "aria-labelledby": "dropdownMenuLink" }
+              },
+              [
+                _vm.session_block
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.unblock($event)
+                          }
+                        }
+                      },
+                      [_vm._v("UnBlock")]
+                    )
+                  : _c(
+                      "a",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.block($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Block")]
+                    ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.clear($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Clear Chat")]
+                )
+              ]
+            )
+          ])
         ]),
         _vm._v(" "),
         _c(
@@ -38413,9 +38501,7 @@ var render = function() {
           },
           _vm._l(_vm.chats, function(chat, index) {
             return _c("p", { key: index, staticClass: "card-text" }, [
-              _vm._v(
-                "\n                " + _vm._s(chat.message) + "\n            "
-              )
+              _vm._v(_vm._s(chat.message))
             ])
           }),
           0
@@ -38432,7 +38518,18 @@ var render = function() {
               }
             }
           },
-          [_vm._m(0)]
+          [
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  placeholder: "Write your message here",
+                  disabled: _vm.session_block
+                }
+              })
+            ])
+          ]
         )
       ])
     : _vm._e()
@@ -38442,12 +38539,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Write your message here" }
-      })
-    ])
+    return _c(
+      "a",
+      {
+        attrs: {
+          href: "#",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _c("i", {
+          staticClass: "fa fa-ellipsis-v",
+          attrs: { "aria-hidden": "true" }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true
