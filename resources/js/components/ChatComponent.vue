@@ -5,7 +5,8 @@
                 <div class="card   card-default">
                     <div class="card-header">Private Chat App</div>
                             <ul class="list-group">
-                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">ChatUser 1</li>
+                                <li class="list-group-item">ChatUser 2</li>
                             </ul>
                 </div>
             </div>
